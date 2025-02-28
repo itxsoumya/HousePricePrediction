@@ -20,7 +20,7 @@ basement_area = st.number_input("Basement Area (sqft)", min_value=0, step=10)
 built_year = st.number_input("Built Year", min_value=1800, max_value=2025, step=1)
 renovation_year = st.number_input("Renovation Year", min_value=0, max_value=2025, step=1)
 schools_nearby = st.number_input("Number of Schools Nearby", min_value=0, step=1)
-distance_airport = st.number_input("Distance from Airport", min_value=0.1, step=0.1)
+distance_airport = st.number_input("Distance from Airport (in K.M)", min_value=0.1, step=0.1)
 year = st.number_input("Year", min_value=2000, max_value=2025, step=1)
 month = st.number_input("Month", min_value=1, max_value=12, step=1)
 
@@ -33,6 +33,6 @@ if st.button("Predict Price"):
     ]).reshape(1, -1)
     
     # Make prediction
-    prediction = model.predict(input_features)[0]
+    prediction = abs(model.predict(input_features)[0])
     
-    st.success(f"Estimated House Price: {prediction:,.2f}")
+    st.success(f"Estimated House Price: {prediction:,.2f} INR")
